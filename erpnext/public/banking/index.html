@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="{{layout_direction}}">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#0089FF">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#0089FF">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#0089FF">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,
+        maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="{{ favicon or ' /assets/erpnext/images/erpnext-favicon.svg' }}" type="image/x-icon">
+  <link rel="icon" href="{{ favicon or ' /assets/erpnext/images/erpnext-favicon.svg' }}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banking | {{ app_name }}</title>
+  <script type="module" crossorigin src="/assets/erpnext/banking/assets/index-CPnNkMtB.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/rolldown-runtime-8BhlS34s.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-frappe-Do1ZmVzw.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-fuse--ddGMqbN.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-radix-PBxB5fcH.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-react-Bu7gr542.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-jotai-BkrKvjbq.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-lucide-BkXXslVd.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/error-banner-CvMol9Ww.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/typography-CAu2sKVS.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/button-DOcW7Qt9.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/dialog-D_6ljQ2x.js">
+  <link rel="modulepreload" crossorigin href="/assets/erpnext/banking/assets/vendor-tanstack-D_Y0JpoQ.js">
+  <link rel="stylesheet" crossorigin href="/assets/erpnext/banking/assets/index-DdCjYgZc.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>window.csrf_token = '{{ frappe.session.csrf_token }}';
+    if (!window.frappe) window.frappe = {};
+
+    frappe.boot = JSON.parse({{ boot }});
+    frappe.boot.layout_direction = "{{ layout_direction }}";
+
+    frappe._translations_loaded = fetch(
+      `/api/method/frappe.translate.get_boot_translations?v=${frappe.boot.translations_version}&lang=${frappe.boot.lang}`,
+      {
+        credentials: "same-origin",
+        headers: {
+          "X-Frappe-CSRF-Token": frappe.csrf_token,
+          "Accept": "application/json"
+        }
+      }
+    ).then(r => r.json()).then(data => {
+      frappe._messages = data.message || {};
+    }).catch(() => { });
+  </script>
+</body>
+
+</html>
